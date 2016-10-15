@@ -20,15 +20,31 @@ class RangeSliderTrackLayer: CALayer {
             ctx.addPath(path.cgPath)
             
             // Fill the track
+            /*
             ctx.setFillColor(slider.trackTintColor.cgColor)
             ctx.addPath(path.cgPath)
             ctx.fillPath()
+            */
             
-            // Fill the highlighted range
-            ctx.setFillColor(slider.trackHighlightTintColor.cgColor)
-            let lowerValuePosition = CGFloat(slider.positionForValue(slider.lowerValue))
-            let upperValuePosition = CGFloat(slider.positionForValue(slider.upperValue))
-            let rect = CGRect(x: lowerValuePosition, y: 0.0, width: upperValuePosition - lowerValuePosition, height: bounds.height)
+            // Fill the lower range
+            ctx.setFillColor(slider.trackLowerTintColor.cgColor)
+            var lowerPosition = CGFloat(slider.positionForValue(slider.minimumValue))
+            var upperPosition = CGFloat(slider.positionForValue(slider.lowerValue))
+            var rect = CGRect(x: lowerPosition, y: 0.0, width: upperPosition - lowerPosition, height: bounds.height)
+            ctx.fill(rect)
+            
+            // Fill the middle range
+            ctx.setFillColor(slider.trackMiddleTintColor.cgColor)
+            lowerPosition = CGFloat(slider.positionForValue(slider.lowerValue))
+            upperPosition = CGFloat(slider.positionForValue(slider.upperValue))
+            rect = CGRect(x: lowerPosition, y: 0.0, width: upperPosition - lowerPosition, height: bounds.height)
+            ctx.fill(rect)
+            
+            // Fill the upper range
+            ctx.setFillColor(slider.trackUpperTintColor.cgColor)
+            lowerPosition = CGFloat(slider.positionForValue(slider.upperValue))
+            upperPosition = CGFloat(slider.positionForValue(slider.maximumValue))
+            rect = CGRect(x: lowerPosition, y: 0.0, width: upperPosition - lowerPosition, height: bounds.height)
             ctx.fill(rect)
         }
     }
